@@ -1,0 +1,124 @@
+=============================================================
+Battery #5 -- FORMAL library scripts vs LOCAL-KIT runner
+generated: 2026-11-06 00:29:48
+
+Formal runner : lincs_real/_formal_lib_run/scripts/11_lincs_connectivity.R
+Formal R lib  : lincs_real/_formal_lib_run/R/connectivity_lincs.R
+(both downloaded from the library scDrugAudit folder, updated 2026-11-05 23:54)
+Formal audit  : lincs_real/_formal_lib_run/results/tables/full_audit_real.rds
+Reference     : lincs_real/lincs_level5.rds (REAL GSE92742 Level-5 SUBSET,
+                5000 Entrez genes x 100 signatures -> 4996 after mapping)
+Commands      : --query shared --nperm 2000 --gene-id entrez
+                [--agg mean | --min-ct 2] ; NO --fast in the formal runs
+Local-kit runs: same params, plus --audit / --fast (vectorised KS, verified
+                identical(data.frame) == TRUE in scripts/_verify_fast.R)
+
+NOTE: both sides use the 100-signature SUBSET, NOT the full EH3226 library.
+      Pipeline validation only; NOT publishable §3.6 results.
+
+---- library script fingerprints (md5) ----
+11_lincs_connectivity.R  2655cafb748f4c8a0be7df9fdc28ded1
+connectivity_lincs.R     a745d4a7fd0a65a2bc6b3d1659e7fee5
+full_audit_real.rds      79d04b0e5fbe1c2440f9bd473ef1ee50
+
+=============================================================
+--- PRIMARY ---
+  formal : naive signature: testing 100  compounds,  0  significant at FDR<0.05;  top = endecaphyllin-x__SKB__trt_cp (score 0.003 , significant: FALSE )
+  formal : rigorous signature: testing 100  compounds,  0  significant at FDR<0.05;  top = chlorprothixene__SKB__trt_cp (score 0.016 , significant: FALSE )
+  formal : compounds tested (m) = 100 | n_perm = 2000
+  formal : smallest attainable permutation p = 1/(n_perm+1) = 0.00049975
+  formal : BH threshold for top-ranked compound = 0.05/m = 0.0005
+  formal : => resolution adequate for single-compound significance.
+  formal : naive hits = none
+  formal : rigorous hits = none
+  local  : (line not found)
+  local  : (line not found)
+  local  : compounds tested (m) = 100 | n_perm = 2000
+  local  : smallest attainable permutation p = 1/(n_perm+1) = 0.00049975
+  local  : BH threshold for top-ranked compound = 0.05/m = 0.0005
+  local  : => resolution adequate for single-compound significance.
+  local  : naive hits = none
+  local  : rigorous hits = none
+  COMPARE naive CSV     : identical = TRUE | all.equal = TRUE
+  COMPARE rigorous CSV  : identical = TRUE | all.equal = TRUE
+
+=============================================================
+--- MEAN ---
+  formal : naive signature: testing 100  compounds,  2  significant at FDR<0.05;  top = vicriviroc__SKB__trt_cp (score 0.01 , significant: TRUE )
+  formal : rigorous signature: testing 100  compounds,  0  significant at FDR<0.05;  top = chlorprothixene__SKB__trt_cp (score 0.013 , significant: FALSE )
+  formal : compounds tested (m) = 100 | n_perm = 2000
+  formal : smallest attainable permutation p = 1/(n_perm+1) = 0.00049975
+  formal : BH threshold for top-ranked compound = 0.05/m = 0.0005
+  formal : => resolution adequate for single-compound significance.
+  formal : naive hits = vicriviroc__SKB__trt_cp(score=-0.010,p=0.0010,q=0.0500); pantoprazole__SKB__trt_cp(score=-0.009,p=0.0005,q=0.0500)
+  formal : rigorous hits = none
+  local  : (line not found)
+  local  : (line not found)
+  local  : compounds tested (m) = 100 | n_perm = 2000
+  local  : smallest attainable permutation p = 1/(n_perm+1) = 0.00049975
+  local  : BH threshold for top-ranked compound = 0.05/m = 0.0005
+  local  : => resolution adequate for single-compound significance.
+  local  : naive hits = vicriviroc__SKB__trt_cp(score=-0.010,p=0.0010,q=0.0500); pantoprazole__SKB__trt_cp(score=-0.009,p=0.0005,q=0.0500)
+  local  : rigorous hits = none
+  COMPARE naive CSV     : identical = TRUE | all.equal = TRUE
+  COMPARE rigorous CSV  : identical = TRUE | all.equal = TRUE
+
+=============================================================
+--- MINCT2 ---
+  formal : naive signature: testing 100  compounds,  0  significant at FDR<0.05;  top = fillalbin__SKB__trt_cp (score 0.046 , significant: FALSE )
+  formal : rigorous signature: testing 100  compounds,  0  significant at FDR<0.05;  top = fillalbin__SKB__trt_cp (score 0.043 , significant: FALSE )
+  formal : compounds tested (m) = 100 | n_perm = 2000
+  formal : smallest attainable permutation p = 1/(n_perm+1) = 0.00049975
+  formal : BH threshold for top-ranked compound = 0.05/m = 0.0005
+  formal : => resolution adequate for single-compound significance.
+  formal : naive hits = none
+  formal : rigorous hits = none
+  local  : (line not found)
+  local  : (line not found)
+  local  : compounds tested (m) = 100 | n_perm = 2000
+  local  : smallest attainable permutation p = 1/(n_perm+1) = 0.00049975
+  local  : BH threshold for top-ranked compound = 0.05/m = 0.0005
+  local  : => resolution adequate for single-compound significance.
+  local  : naive hits = epothilone__SKB__trt_cp(score=-0.042,p=0.0005,q=0.0500)
+  local  : rigorous hits = none
+  COMPARE naive CSV     : identical = FALSE | all.equal = FALSE
+  COMPARE rigorous CSV  : identical = FALSE | all.equal = FALSE
+  naive score diff: max|d|=0.006 | n != 0 = 22
+
+=============================================================
+--- ALIGNED LOCAL-KIT min-ct 2 RE-RUN (after backbone-order fix) ---
+  aligned naive     CSV : identical = FALSE
+    score identical = TRUE | q_value identical = TRUE | significant identical = TRUE
+    p_value: rows differing = 1 | max|d| = 0.0005 (= 1.0005 permutation count)
+  aligned rigorous  CSV : identical = FALSE
+    score identical = TRUE | q_value identical = TRUE | significant identical = TRUE
+    p_value: rows differing = 1 | max|d| = 0.0005 (= 1.0005 permutation count)
+  (pre-fix result kept in results/tables/lincs_minct2/ for the record)
+  (the 1-count p difference is the --fast vectorised KS at an exact
+   floating-point tie boundary; no score / q / significance changes)
+
+=============================================================
+INTERPRETATION
+1. PRIMARY and MEAN are bit-for-bit identical between the formal library
+   scripts and the local-kit runner (identical(data.frame) == TRUE). The
+   library's Entrez->SYMBOL de-duplication fix has no numerical effect on
+   this reference (4996 mapped rows, 0 duplicate symbols).
+2. MINCT2 differed BEFORE the fix: formal 0/0 significant, local-kit 1/0.
+   Diagnosis (results/tables/_minct2_order_diagnosis.txt): both scripts
+   select the same 921 genes / 262 overlapping genes with IDENTICAL logFC
+   values, but order them differently (tapply-sorted vs $candidates order).
+   All 100 reference columns contain ties (median 95 tied values among the
+   262 genes), so the KS running sum and the permutation null become
+   order-dependent. The 'epothilone' nominal hit disappears on a pure gene
+   reordering. After aligning the local runner to formal order, scores,
+   q_values and significance match and BOTH report 0 significant; only 2
+   p_value rows differ by one permutation count (--fast tie boundary).
+3. Consequence: all nominal hits in these subset runs are unstable -- to
+   n_perm (1000/2000/3000), to aggregation (absmax/mean), and now to gene
+   ordering. They are FRAGILITY findings, NOT connectivity discoveries.
+   Recommended future hardening: sort the final query vector by gene name
+   in BOTH runners before audit_connectivity(); not applied here so the
+   formal §3 commands stay verbatim.
+4. The full EH3226 lincs.h5 / 45956-signature matrix is STILL NOT in the
+   library or on this machine. Full-library §3 rerun remains pending.
+=============================================================

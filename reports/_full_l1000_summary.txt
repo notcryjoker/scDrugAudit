@@ -1,0 +1,115 @@
+=========================================================================
+ §3 BATTERY #5 -- OFFICIAL FULL LINCS L1000 RERUN (EH3226)
+=========================================================================
+
+DATA (real, not synthetic / not a subset):
+  source      : ExperimentHub EH3226 'lincs', signatureSearchData/v0.1/lincs.h5
+  download    : https://mghp.osn.xsede.org/bir190004-bucket01/ExperimentHub/
+                signatureSearchData/v0.1/lincs.h5 (2,464,124,175 B, HDF5 verified)
+  native dims : 12328 genes (Entrez) x 45956 signatures, moderated z-scores
+  exported    : lincs_real/lincs_level5_full_query.rds, 3070 x 45956
+                query-equivalent crop (verified in _crop_equivalence.txt)
+  audit cache : lincs_real/full_audit_real_formal.rds (FORMAL $naive/$rigorous)
+  commands    : --query shared --nperm 2000 --gene-id entrez
+                --parallel 10 --block-cols 1000 --ckpt-dir lincs_real/_ckpt_full
+                (parallel engine verified 6/6 identical to --fast, which is
+                 verified identical to the FORMAL library runner; --ckpt-dir
+                 adds restartable block checkpoints, no numerical effect)
+  three specs : primary=absmax(5557 backbone) | mean=agg sensitivity |
+                minct2=absmax + --min-ct 2 (921 backbone)
+
+PERMUTATION RESOLUTION (analytic, m = 45956):
+  smallest attainable p = 1/(2000+1) = 4.9975e-04
+  BH rank-1 threshold   = 0.05/45956 = 1.0880e-06
+  => RESOLUTION-LIMITED: >= 460 compounds must tie at the minimal p before
+     a single FDR<0.05 hit is even possible. '0 significant' is therefore
+     CONSTRUCTIVE, not evidence of absent drug connectivity.
+
+---- PRIMARY (results/tables/lincs_full_primary) ----
+  naive     : compounds=45956 | significant=0 | min_p=0.0005 | min_q=0.7031
+    resolution  : columns at minimal p (count=0) = 32 | need >= 460 tied for one FDR<0.05 hit
+    q rounding  : q==0.0500 but significant=TRUE rows = 0 (round artifact; significance uses raw q)
+    top |score| : BRD-K49669601__A549__trt_cp (-0.008, p 0.0005, q 0.7031, sig FALSE)
+    next        : erythromycin-ethylsuccinate__HCC515__trt_cp (-0.005) | MDL-11939__A549__trt_cp (-0.005)
+    score quantiles |.| : 0.000 / 0.000 / 0.001 / 0.008
+  rigorous  : compounds=45956 | significant=0 | min_p=0.0005 | min_q=1
+    resolution  : columns at minimal p (count=0) = 21 | need >= 460 tied for one FDR<0.05 hit
+    q rounding  : q==0.0500 but significant=TRUE rows = 0 (round artifact; significance uses raw q)
+    top |score| : BRD-K49669601__A549__trt_cp (-0.018, p 0.0005, q 1, sig FALSE)
+    next        : BRD-K49669601__A375__trt_cp (-0.015) | BRD-K30194621__PC3__trt_cp (-0.011)
+    score quantiles |.| : 0.000 / 0.001 / 0.003 / 0.018
+
+---- MEAN (results/tables/lincs_full_mean) ----
+  naive     : compounds=45956 | significant=0 | min_p=0.0005 | min_q=1
+    resolution  : columns at minimal p (count=0) = 19 | need >= 460 tied for one FDR<0.05 hit
+    q rounding  : q==0.0500 but significant=TRUE rows = 0 (round artifact; significance uses raw q)
+    top |score| : MDL-11939__A549__trt_cp (-0.007, p 0.0005, q 1, sig FALSE)
+    next        : T-0156__NEU__trt_cp (-0.007) | BRD-K17693482__A549__trt_cp (-0.007)
+    score quantiles |.| : 0.000 / 0.001 / 0.002 / 0.007
+  rigorous  : compounds=45956 | significant=0 | min_p=0.0005 | min_q=0.8833
+    resolution  : columns at minimal p (count=0) = 26 | need >= 460 tied for one FDR<0.05 hit
+    q rounding  : q==0.0500 but significant=TRUE rows = 0 (round artifact; significance uses raw q)
+    top |score| : BRD-K49669601__A549__trt_cp (-0.025, p 0.0005, q 0.8833, sig FALSE)
+    next        : BRD-K49669601__A375__trt_cp (-0.022) | SA-1922927__MCF7__trt_cp (-0.017)
+    score quantiles |.| : 0.000 / 0.002 / 0.004 / 0.025
+
+---- MINCT2 (results/tables/lincs_full_minct2) ----
+  naive     : compounds=45956 | significant=0 | min_p=0.0005 | min_q=0.7177
+    resolution  : columns at minimal p (count=0) = 32 | need >= 460 tied for one FDR<0.05 hit
+    q rounding  : q==0.0500 but significant=TRUE rows = 0 (round artifact; significance uses raw q)
+    top |score| : thenoyltrifluoroacetone__HA1E__trt_cp (-0.035, p 0.0005, q 0.7177, sig FALSE)
+    next        : BRD-K51454562__PC3__trt_cp (-0.031) | doconexent__HA1E__trt_cp (-0.030)
+    score quantiles |.| : 0.001 / 0.004 / 0.013 / 0.035
+  rigorous  : compounds=45956 | significant=0 | min_p=0.0005 | min_q=0.3765
+    resolution  : columns at minimal p (count=0) = 61 | need >= 460 tied for one FDR<0.05 hit
+    q rounding  : q==0.0500 but significant=TRUE rows = 0 (round artifact; significance uses raw q)
+    top |score| : HTMT__HA1E__trt_cp (-0.064, p 0.0005, q 0.3765, sig FALSE)
+    next        : SA-1463810__NPC__trt_cp (-0.052) | BRD-K84024786__A375__trt_cp (-0.050)
+    score quantiles |.| : 0.001 / 0.005 / 0.016 / 0.064
+
+=========================================================================
+ EMPIRICAL CROSS-CHECK vs THE 100-SIGNATURE SUBSET
+=========================================================================
+  On the 100-signature sample_db.h5 subset, --agg mean produced 2 nominal
+  hits (vicriviroc, pantoprazole); --min-ct 2 produced 1 (epothilone) in the
+  pre-fix local-kit run (formal runner: 0, a gene-order artefact).
+  ALL of them vanish on the real 45956-signature library. Together with the
+  gene-order artefact (_minct2_order_diagnosis.txt) and the nperm=1000/2000/
+  3000 instability (_lincs_three_runs_comparison.txt), those nominal hits are
+  benchmark FRAGILITY evidence only, never connectivity discoveries.
+  Observed minimal-p (count=0) columns across all 6 calibrations: 19-61,
+  far below the 460 needed for even one FDR<0.05 hit.
+
+=========================================================================
+ INTERPRETATION / MANUSCRIPT USE
+=========================================================================
+1. §3.6 may now state that battery #5 used the REAL full LINCS L1000
+   Level-5 database (45956 signatures), not a synthetic or 100-column ref.
+   It must ALSO state the resolution floor: do not upgrade the claim to
+   'no drug connectivity exists' or 'we discovered a connectivity signal'.
+2. No FDR<0.05 hit in ANY of the 6 calibrations (3 specs x 2 pipelines).
+   The reportable pattern is pipeline/aggregation sensitivity of the ranked
+   top compounds and |score| (primary naive 0.008 vs rigorous 0.018;
+   minct2 rigorous 0.064), with min q staying 0.3765-1.0000 throughout.
+3. '0 significant' is CONSTRUCTIVE: m=45956, n_perm=2000, p_min=4.9975e-4,
+   BH rank-1 threshold 1.0880e-6; >=460 tied minimal-p columns are needed.
+   Report these four numbers explicitly. To make even the rank-1 threshold
+   attainable by permutation alone, p_min <= 1.0880e-6 requires
+   n_perm >= 919,117 (~9.2e5, i.e. ~460x the present calibration cost),
+   which is computationally prohibitive at 45956 signatures. The resolution
+   ceiling is therefore a PROPERTY OF THE AUDIT DESIGN, not a tuning issue.
+4. Scores in lincs_calibration_*.csv are SIGNED; lincs_summary.txt prints
+   |score| for its top compound. This report ranks by |score| and shows the
+   signed value - do not quote the two files interchangeably.
+5. q_value is rounded to 4 dp while significance uses the raw q; 0 rows in
+   the full-library runs show the q==0.05 / significant=TRUE artefact.
+6. Limitations to declare: n_perm=2000 p-resolution; signature-level (45956)
+   rather than collapsed compound-level reference; the query-equivalent crop
+   is exact for THIS estimator but is not a general full-matrix export;
+   --gene-id entrez mapping follows the formal runner (9 unmapped native
+   Entrez IDs, none in the crop); tie-order dependence is far smaller than
+   in the subset (max tie group 15 vs ~95) but nonzero (2/200 columns with
+   >100 repeated values) - the query-name sorting hardening proposed in
+   PROJECT_STATE.md §9.5 remains outstanding and was intentionally NOT
+   applied, so §3 stays bit-for-bit reproducible.
+=========================================================================

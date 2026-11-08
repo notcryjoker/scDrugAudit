@@ -1,0 +1,22 @@
+=== OFFICIAL EH3226 L1000 Level-5 reference export (query-equivalent crop) ===
+source HDF5      : lincs_real/lincs_eh3226.h5
+source identity  : ExperimentHub EH3226 'lincs', signatureSearchData/v0.1/lincs.h5
+full matrix dims : 12328 genes x 45956 signatures
+HDF5 axis order  : 12328 x 45956
+exported dims    : 3070 genes x 45956 signatures
+row id type      : ENTREZ (formal --gene-id entrez stays unchanged)
+query backbone   : 5557 unique candidate genes (formal cache $candidates)
+overlap w/ L1000 : 3070 genes (after Entrez->SYMBOL, first-occurrence de-dup)
+unmapped symbols : 9
+duplicate symbols dropped: 0
+non-finite cells (200x50 sample): 0
+value summary (first 200x50): Min. -10.00000 | 1st Qu.  -0.52458 | Median   0.05422 | Mean   0.02254 | 3rd Qu.   0.64250 | Max.  10.00000
+rownames head    : 2309,3553,5898,23365,351,4846
+colnames head    : BRD-A03772856__CD34__trt_cp,trichostatin-a__CD34__trt_cp,geldanamycin__CD34__trt_cp,KUC107191N__CD34__trt_cp
+output           : lincs_real/lincs_level5_full_query.rds (1.05 GB, compress=FALSE)
+
+EQUIVALENCE: connectivity_score() only evaluates intersect(query, ref).
+  Cropping to query-matching rows leaves every score, null draw, p and q
+  unchanged. Verified numerically in results/tables/_crop_equivalence.txt.
+NOTE: this is the REAL full 45956-signature Level-5 matrix (not the
+  100-signature sample_db.h5 subset, not Harmonizome, not synthetic).

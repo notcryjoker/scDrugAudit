@@ -1,0 +1,34 @@
+file: lincs_real/lincs_eh3226.h5 
+bytes: 2464124175 
+HDF5 magic: 137 72 68 70 13 10 26 10 
+
+=== h5ls(all=TRUE) ===
+  group     name         ltype cset       otype num_attrs dclass          dtype
+0     /    assay H5L_TYPE_HARD    0 H5I_DATASET         0  FLOAT H5T_IEEE_F64LE
+1     / colnames H5L_TYPE_HARD    0 H5I_DATASET         0 STRING     H5T_STRING
+2     / rownames H5L_TYPE_HARD    0 H5I_DATASET         0 STRING     H5T_STRING
+   stype rank           dim                   maxdim
+0 SIMPLE    2 12328 x 45956                UNLIMITED
+1 SIMPLE    2     45956 x 1 18446744073709551615 x 1
+2 SIMPLE    2     12328 x 1 18446744073709551615 x 1
+
+=== top-level dataset dims (HDF5 axis order) ===
+-- assay --
+   HDF5 dims: 12328 x 45956 
+-- colnames --
+   HDF5 dims: 45956 x 1 
+-- rownames --
+   HDF5 dims: 12328 x 1 
+
+=== tiny slice test (R vs HDF5 axis order) ===
+h5read(index=list(1:4,1:3)) -> dim: 4 x 3 
+values:
+         [,1]    [,2]     [,3]
+[1,]  0.36540 -1.9333 -1.78015
+[2,]  0.69385 -4.0653 -2.45910
+[3,]  0.55435  0.1850  0.22250
+[4,] -0.31580  2.2660  0.67035
+rownames length: 12328  head: 5720,466,6009,2309,387,3553 
+colnames length: 45956  head: BRD-A03772856__CD34__trt_cp,trichostatin-a__CD34__trt_cp,geldanamycin__CD34__trt_cp,KUC107191N__CD34__trt_cp,BRD-A35207501__CD34__trt_cp,iloprost__CD34__trt_cp 
+
+INSPECT DONE

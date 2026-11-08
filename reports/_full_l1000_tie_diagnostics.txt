@@ -1,0 +1,21 @@
+=== Tie diagnostics: OFFICIAL EH3226 full Level-5 (first 200 signatures) ===
+all-gene dims   : 12328 genes x 200 signatures
+query rows used by KS : 3070 (Entrez->SYMBOL, first-occurrence de-dup)
+
+ALL 12328 genes      : duplicated/col median=4 mean=298.8 max=1884 | cols>100 dups=76 | max tie group=48
+QUERY 3070 rows     : duplicated/col median=1 mean=21.1 max=126 | cols>100 dups=2 | max tie group=15
+worst query column (index 15): top repeated values 0,0.674499988555908,-0.674499988555908 (counts 6,5,4)
+
+For comparison, the 100-signature sample_db.h5 subset had ~95 tied values
+per column at the median, i.e. a LARGE tie group sitting inside the ranked
+gene set (see results/tables/_minct2_order_diagnosis.txt).
+
+VERDICT: within the 3070 gene rows connectivity_score() actually ranks,
+  the typical column has 1 duplicated values and the largest tie group
+  is 15 (vs ~95 in the 100-signature subset). Gene-order sensitivity is
+  therefore MUCH smaller, but NOT zero: 2/200 columns still have >100
+  repeated values (mostly exact zeros). Interpret any single top hit with
+  that caveat; do not present it as a connectivity discovery.
+
+NOTE: this diagnostic describes the reference, not the calibration outcome.
+  All three §3 runs are reported separately in _full_l1000_summary.txt.

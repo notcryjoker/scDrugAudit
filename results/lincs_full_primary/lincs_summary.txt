@@ -1,0 +1,18 @@
+Battery #5 (LINCS L1000 connectivity) - run summary
+reference: lincs_level5_full_query.rds | dim 3070 x 45956
+audit cache: FORMAL ($naive/$rigorous)
+query mode: shared | aggregation: absmax | min_celltypes: off
+queries identical: FALSE | formal semantics: TRUE
+naive query genes overlapping ref: 3052 | rigorous: 3052
+method: ks | n_perm: 2000 | gene-id: entrez
+naive: 0 significant | top BRD-K49669601__A549__trt_cp (score 0.008, q 0.7031)
+rigorous: 0 significant | top BRD-K49669601__A549__trt_cp (score 0.018, q 1)
+
+----- Permutation-resolution diagnostic -----
+compounds tested (m) = 45956 | n_perm = 2000
+smallest attainable permutation p = 1/(n_perm+1) = 0.00049975
+BH threshold for top-ranked compound = 0.05/m = 1.088e-06
+=> RESOLUTION-LIMITED: need >= 460 compounds tied at the minimal p
+   for even the first FDR<0.05 hit. A '0 significant' result is forced
+   BY CONSTRUCTION, NOT evidence of absent drug connectivity.
+---------------------------------------------

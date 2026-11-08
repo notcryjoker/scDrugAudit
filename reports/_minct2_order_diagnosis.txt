@@ -1,0 +1,29 @@
+=== min-ct 2 query diagnostics (naive pipeline, absmax) ===
+formal backbone genes: 921 | local backbone genes: 921
+query genes after ref overlap: formal 262 | local 262
+same gene SET            : TRUE
+same gene ORDER          : FALSE
+same VALUES by gene name : TRUE
+first 8 formal genes: ACADVL, ACSL1, ADAMTS1, ADAMTS5, ADGRA3, ADGRG1, ADGRG6, ADIRF
+first 8 local  genes: MT2A, CLU, PLA2G2A, IGF1, CXCL5, APOD, ANGPTL4, SDC2
+
+raw |score| differs for 33 / 100 compounds | max diff = 0.00577506 | mean diff = 0.000390056
+(values are identical by gene name; only their ORDER changed)
+
+=== reference ties among the 262 query genes ===
+columns with ANY tied ref value: 100 / 100
+median tied values per column: 95 | max: 127
+
+sorted-by-name score identical to formal order: TRUE
+
+=== conclusion ===
+The min-ct 2 discrepancy is an ORDERING artefact, not a data or
+estimator difference: both scripts select the same 921 genes and the same
+262 overlapping genes with identical logFC values, but the formal runner
+builds the backbone from tapply() (sorted) while the local-kit runner
+preserves $candidates appearance order. Ties in the Level-5 mod-z values
+make the KS running sum (and hence the permutation null) order-dependent.
+=> the single 'epothilone' nominal hit is not even stable to a pure gene
+   reordering, on top of the n_perm=1000/3000 instability already recorded.
+=> to make any run reproducible, sort the final query vector by gene name
+   in BOTH runners before calling audit_connectivity().

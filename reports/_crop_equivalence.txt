@@ -1,0 +1,16 @@
+=== Numerical equivalence: FULL reference vs QUERY-CROPPED reference ===
+full   : 5000 genes x 100 signatures (lincs_real/lincs_level5.rds)
+cropped: 1246 genes x 100 signatures (lincs_real/_crop_smoke.rds)
+crop rule: Entrez->SYMBOL, first-occurrence de-dup, keep symbols in the 5557-gene query backbone
+runner: --query shared --nperm 2000 --gene-id entrez --fast
+
+  primary  naive     : identical=TRUE  | n_sig full=0 crop=0
+  primary  rigorous  : identical=TRUE  | n_sig full=0 crop=0
+  minct2   naive     : identical=TRUE  | n_sig full=0 crop=0
+  minct2   rigorous  : identical=TRUE  | n_sig full=0 crop=0
+
+CONCLUSION: cropping to query-matching rows leaves every score, p, q and
+significance unchanged, because connectivity_score() only evaluates
+intersect(names(query), names(ref)). The 3070 x 45956 export used for the
+full-library §3 rerun is therefore a lossless, query-equivalent projection
+of the official 12328 x 45956 EH3226 matrix.

@@ -1,0 +1,11 @@
+=== EH3226 official LINCS L1000 Level-5 HDF5 download ===
+source        : https://mghp.osn.xsede.org/bir190004-bucket01/ExperimentHub/signatureSearchData/v0.1/lincs.h5
+expected bytes: 2464124175
+actual bytes  : 2464124175
+size match    : TRUE
+HDF5 magic    : TRUE
+chunks        : 588 x 4194304 bytes, 24 parallel R workers
+elapsed       : 11.2 min
+output        : lincs_real/lincs_eh3226.h5
+provenance    : ExperimentHub EH3226 ('lincs'), rdatapath signatureSearchData/v0.1/lincs.h5
+content       : 12328 genes x 45956 signatures, moderated z-scores (GSE92742 Level 5)

@@ -1,0 +1,18 @@
+=== Numerical equivalence: --fast vs --parallel (column-block KS) ===
+reference: lincs_real/lincs_level5.rds (100 real Level-5 signatures, smoke check only)
+settings : --query shared --nperm 2000 --gene-id entrez --audit formal cache
+parallel : 4 workers, 25 columns/block (forces 4 blocks on 100 columns)
+
+  primary  naive     : identical=TRUE  | n_sig fast=0 par=0 | max|diff|=0
+  primary  rigorous  : identical=TRUE  | n_sig fast=0 par=0 | max|diff|=0
+  mean     naive     : identical=TRUE  | n_sig fast=2 par=2 | max|diff|=0
+  mean     rigorous  : identical=TRUE  | n_sig fast=0 par=0 | max|diff|=0
+  minct2   naive     : identical=TRUE  | n_sig fast=0 par=0 | max|diff|=0
+  minct2   rigorous  : identical=TRUE  | n_sig fast=0 par=0 | max|diff|=0
+
+VERDICT: PASS - parallel calibration is numerically equivalent to --fast.
+
+Note: a 1/(n_perm+1) difference in a single p_value can arise from the
+vectorised KS at exact floating-point ties; scores/q/significance agree.
+BACKGROUND: --fast was itself verified identical to the FORMAL library
+runner in results/tables/_formal_lib_vs_local_kit.txt.
