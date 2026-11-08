@@ -41,6 +41,11 @@ redistributed here. They can be regenerated from ExperimentHub EH3226; the
 projection is query-specific and must be re-exported for a different query gene
 set. The 2.46 GB HDF5 source and the exported matrix remain local analysis inputs.
 
+## Archive
+
+A versioned Zenodo archive of this release (analysis code and results) is
+available at `https://doi.org/10.5281/zenodo.24054024`.
+
 ## Licence
 
 GPL-3.0 (see `LICENSE`).
